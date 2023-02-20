@@ -1,15 +1,10 @@
 package datastructure.linkedlist;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/**
- * 단방향 LinkedList 구현하기
- * 1. data를 가진 Node를 구현한다.
- * 2. append(int data) 메서드를 구현하여 data를 추가할 수 있다.
- * 3. delete(int data) 메서드를 구현하여 data를 삭제할 수 있다.
- * 4. print() 메서드를 구현하여 내부 data들을 출력할 수 있다.
- */
 public class LinkedListTest {
 
     @DisplayName("print 메서드 구현하기")
@@ -82,6 +77,50 @@ public class LinkedListTest {
         ll.delete(1);
 
         // then
-        ll.print(); // 2->3
+        assertThat(ll.getList()).containsExactly(2, 3);
+    }
+
+    @DisplayName("정렬되지 않은 LinkedList의 중복된 값 제거하기 - 포인터")
+    @Test
+    void removeDuplicateDataInNotSortedLinkedList_pointer() {
+        // given
+        LinkedList ll = new LinkedList();
+        ll.append(1);
+        ll.append(1);
+        ll.append(3);
+        ll.append(4);
+        ll.append(2);
+        ll.append(3);
+        ll.append(4);
+        ll.append(4);
+        ll.append(4);
+
+        // when
+        ll.removeDuplicateDataPointer();
+
+        // then
+        assertThat(ll.getList()).containsExactly(1, 3, 4, 2);
+    }
+
+    @DisplayName("정렬되지 않은 LinkedList의 중복된 값 제거하기 - 버퍼")
+    @Test
+    void removeDuplicateDataInNotSortedLinkedList_buffer() {
+        // given
+        LinkedList ll = new LinkedList();
+        ll.append(1);
+        ll.append(1);
+        ll.append(3);
+        ll.append(4);
+        ll.append(2);
+        ll.append(3);
+        ll.append(4);
+        ll.append(4);
+        ll.append(4);
+
+        // when
+        ll.removeDuplicateDataBuffer();
+
+        // then
+        assertThat(ll.getList()).containsExactly(1, 3, 4, 2);
     }
 }
