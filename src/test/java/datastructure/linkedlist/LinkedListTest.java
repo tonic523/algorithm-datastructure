@@ -166,3 +166,4 @@ public class LinkedListTest {
         assertThat(actual).isEqualTo(3);
     }
 }
+
