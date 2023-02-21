@@ -123,4 +123,46 @@ public class LinkedListTest {
         // then
         assertThat(ll.getList()).containsExactly(1, 3, 4, 2);
     }
+
+    /**
+     * 공간 복잡도: O(N)
+     * 시간 복잡도: O(N)
+     */
+    @DisplayName("버퍼를 사용해 LinkedList에서 뒤에서 k번째 값 조회하기")
+    @Test
+    void findKthToLastBuffer() {
+        // given
+        LinkedList ll = new LinkedList();
+        ll.append(1);
+        ll.append(2);
+        ll.append(3);
+        ll.append(4);
+
+        // when
+        int actual = ll.findKthToLastBuffer(2);
+
+        // then
+        assertThat(actual).isEqualTo(3);
+    }
+
+    /**
+     * 공간 복잡도: O(N)
+     * 시간 복잡도: O(2N)
+     */
+    @DisplayName("재귀를 사용해 LinkedList에서 뒤에서 k번째 값 조회하기")
+    @Test
+    void findKthToLastRecursion() {
+        // given
+        LinkedList ll = new LinkedList();
+        ll.append(1);
+        ll.append(2);
+        ll.append(3);
+        ll.append(4);
+
+        // when
+        int actual = ll.findKthToLastRecursion(2);
+
+        // then
+        assertThat(actual).isEqualTo(3);
+    }
 }

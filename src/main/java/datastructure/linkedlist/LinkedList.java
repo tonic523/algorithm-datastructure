@@ -11,13 +11,13 @@ public class LinkedList {
     static class Node {
 
         int data;
-        Node next;
-    }
 
+        Node next;
+
+    }
     public LinkedList() {
         header = new Node();
     }
-
     public void append(int data) {
         Node end = new Node();
         end.data = data;
@@ -65,6 +65,36 @@ public class LinkedList {
                 n = n.next;
             }
         }
+    }
+
+    public int findKthToLastBuffer(int k) {
+        List<Integer> buffer = getList();
+        if (k <= 0 || k > buffer.size()) {
+            throw new IllegalArgumentException("접근할 수 없는 위치입니다.");
+        }
+        return buffer.get(buffer.size() - k);
+    }
+
+    public int findKthToLastRecursion(int k) {
+        return findKthToLastRecursion(header, k, new Reference()).data;
+    }
+
+    private Node findKthToLastRecursion(Node n, int k, Reference r) {
+        if (n == null) {
+            return null;
+        }
+
+        Node found = findKthToLastRecursion(n.next, k, r);
+        System.out.println(found);
+        r.count++;
+        if (r.count == k) {
+            return n;
+        }
+        return found;
+    }
+
+    class Reference {
+        int count = 0;
     }
 
     public List<Integer> getList() {
